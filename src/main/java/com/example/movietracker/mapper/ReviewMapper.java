@@ -15,6 +15,7 @@ public class ReviewMapper implements Mapper<Review, ReviewDto> {
         reviewDto.setUserId(entity.getUser().getId());
         reviewDto.setComment(entity.getComment());
         reviewDto.setRating(entity.getRating());
+        reviewDto.setDate(entity.getCreationDate());
         return reviewDto;
     }
 
