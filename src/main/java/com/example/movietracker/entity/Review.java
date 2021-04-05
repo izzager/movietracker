@@ -3,6 +3,7 @@ package com.example.movietracker.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class Review {
 
     private int rating;
 
+    @CreationTimestamp
     private LocalDateTime creationDate;
 
 }

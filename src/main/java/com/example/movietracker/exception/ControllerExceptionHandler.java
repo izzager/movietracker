@@ -20,4 +20,10 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     public String handleResourceForbidden(final ResourceForbiddenException e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler({BadRequestException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public String handleBadRequest(final BadRequestException e) {
+        return e.getMessage();
+    }
 }
