@@ -21,7 +21,7 @@ public class UserMapper implements Mapper<User, UserDto> {
         userDto.setWishlist(entity.getWishlist()
                 .stream()
                 .map(movieMapper::toDto)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toList()));
         userDto.setWatched(entity.getWatched()
                 .stream()
                 .map(movieMapper::toDto)

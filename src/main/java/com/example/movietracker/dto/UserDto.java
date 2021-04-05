@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -15,7 +16,7 @@ public class UserDto {
 
     private String username;
 
-    private Set<MovieDto> wishlist;
+    private List<MovieDto> wishlist;
 
     private Set<MovieDto> watched;
 
