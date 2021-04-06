@@ -3,6 +3,7 @@ package com.example.movietracker.mapper;
 import com.example.movietracker.dto.UserDto;
 import com.example.movietracker.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -12,12 +13,12 @@ import java.util.stream.Collectors;
 public class UserMapper implements Mapper<User, UserDto> {
 
     private final MovieMapper movieMapper;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public UserDto toDto(User entity) {
         UserDto userDto = new UserDto();
-        userDto.setId(entity.getId());
-        userDto.setUsername(entity.getUsername());
+        modelMapper.map(entity, userDto);
         userDto.setWishlist(entity.getWishlist()
                 .stream()
                 .map(movieMapper::toDto)
