@@ -1,7 +1,6 @@
 package com.example.movietracker.service.impl;
 
 import com.example.movietracker.dto.ReviewDto;
-import com.example.movietracker.entity.Movie;
 import com.example.movietracker.entity.Review;
 import com.example.movietracker.mapper.ReviewMapper;
 import com.example.movietracker.repository.ReviewRepository;
