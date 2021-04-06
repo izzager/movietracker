@@ -19,10 +19,10 @@ public class ReviewDtoValidator implements DtoValidator<ReviewDto> {
 
     @Override
     public void validate(ReviewDto dto) {
-        if (!movieRepository.existsById(dto.getMovieId())) {
+        if (dto.getMovieId() == null || !movieRepository.existsById(dto.getMovieId())) {
             throw new NotFoundException("Movie not found");
         }
-        if (!userRepository.existsById(dto.getUserId())) {
+        if (dto.getUserId() == null || !userRepository.existsById(dto.getUserId())) {
             throw new NotFoundException("User not found");
         }
         if(dto.getRating() < 1 || dto.getRating() > 10
