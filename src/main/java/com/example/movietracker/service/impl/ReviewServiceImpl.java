@@ -2,10 +2,10 @@ package com.example.movietracker.service.impl;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Review;
+import com.example.movietracker.helper.MovieRepositoryHelper;
 import com.example.movietracker.mapper.ReviewMapper;
 import com.example.movietracker.repository.ReviewRepository;
 import com.example.movietracker.service.ReviewService;
-import com.example.movietracker.validator.MovieValidator;
 import com.example.movietracker.validator.ReviewDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ReviewMapper reviewMapper;
-    private final MovieValidator movieValidator;
+    private final MovieRepositoryHelper movieRepositoryHelper;
     private final ReviewDtoValidator reviewDtoValidator;
 
     @Override
@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewDto> getReviewsForMovie(Long movieId) {
-        return movieValidator.getMovie(movieId).getReview()
+        return movieRepositoryHelper.ensureMovieExists(movieId).getReview()
                 .stream()
                 .map(reviewMapper::toDto)
                 .collect(Collectors.toList());

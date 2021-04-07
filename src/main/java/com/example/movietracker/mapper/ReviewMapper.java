@@ -2,8 +2,8 @@ package com.example.movietracker.mapper;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Review;
-import com.example.movietracker.validator.MovieValidator;
-import com.example.movietracker.validator.UserValidator;
+import com.example.movietracker.helper.MovieRepositoryHelper;
+import com.example.movietracker.helper.UserRepositoryHelper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ReviewMapper implements Mapper<Review, ReviewDto> {
 
-    private final UserValidator userValidator;
-    private final MovieValidator movieValidator;
+    private final UserRepositoryHelper userRepositoryHelper;
+    private final MovieRepositoryHelper movieRepositoryHelper;
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
@@ -29,8 +29,8 @@ public class ReviewMapper implements Mapper<Review, ReviewDto> {
     public Review toEntity(ReviewDto reviewDto) {
         Review review = new Review();
         modelMapper.map(reviewDto, review);
-        review.setUser(userValidator.getUser(reviewDto.getUserId()));
-        review.setMovie(movieValidator.getMovie(reviewDto.getMovieId()));
+        review.setUser(userRepositoryHelper.ensureUserExists(reviewDto.getUserId()));
+        review.setMovie(movieRepositoryHelper.ensureMovieExists(reviewDto.getMovieId()));
         return review;
     }
 

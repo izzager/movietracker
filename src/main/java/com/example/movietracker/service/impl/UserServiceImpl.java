@@ -3,10 +3,10 @@ package com.example.movietracker.service.impl;
 import com.example.movietracker.dto.MovieDto;
 import com.example.movietracker.entity.User;
 import com.example.movietracker.exception.NotFoundException;
+import com.example.movietracker.helper.UserRepositoryHelper;
 import com.example.movietracker.mapper.MovieMapper;
 import com.example.movietracker.repository.UserRepository;
 import com.example.movietracker.service.UserService;
-import com.example.movietracker.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final MovieMapper movieMapper;
-    private final UserValidator userValidator;
+    private final UserRepositoryHelper userRepositoryHelper;
     private final UserRepository userRepository;
 
     @Override
     public MovieDto findNextMovieInWishlist(Long userId) {
-        User user = userValidator.getUser(userId);
+        User user = userRepositoryHelper.ensureUserExists(userId);
         if (user.getWishlist().isEmpty()) {
             throw new NotFoundException("Your wishlist is empty");
         }
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<MovieDto> getWatchedMovies(Long userId) {
-        return userValidator.getUser(userId).getWatched()
+        return userRepositoryHelper.ensureUserExists(userId).getWatched()
                 .stream()
                 .map(movieMapper::toDto)
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<MovieDto> getWishList(Long userId) {
-        return userValidator.getUser(userId).getWishlist()
+        return userRepositoryHelper.ensureUserExists(userId).getWishlist()
                 .stream()
                 .map(movieMapper::toDto)
                 .collect(Collectors.toList());
