@@ -25,6 +25,6 @@ public class Movie {
     private String link;
 
     @OneToMany(mappedBy = "movie")
-    private List<Review> review = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 
 }

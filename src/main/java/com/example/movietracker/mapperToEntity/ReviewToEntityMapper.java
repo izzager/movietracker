@@ -1,4 +1,4 @@
-package com.example.movietracker.mapper;
+package com.example.movietracker.mapperToEntity;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Review;
@@ -10,21 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ReviewMapper implements Mapper<Review, ReviewDto> {
+public class ReviewToEntityMapper implements MapperToEntity<ReviewDto, Review> {
 
     private final UserRepositoryHelper userRepositoryHelper;
     private final MovieRepositoryHelper movieRepositoryHelper;
-    private final ModelMapper modelMapper = new ModelMapper();
-
-    @Override
-    public ReviewDto toDto(Review entity) {
-        ReviewDto reviewDto = new ReviewDto();
-        modelMapper.map(entity, reviewDto);
-        reviewDto.setMovieId(entity.getMovie().getId());
-        reviewDto.setUserId(entity.getUser().getId());
-        reviewDto.setDate(entity.getCreationDate());
-        return reviewDto;
-    }
+    private final ModelMapper modelMapper;
 
     public Review toEntity(ReviewDto reviewDto) {
         Review review = new Review();

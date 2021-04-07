@@ -6,10 +6,10 @@ import com.example.movietracker.entity.User;
 import com.example.movietracker.exception.ResourceForbiddenException;
 import com.example.movietracker.helper.MovieRepositoryHelper;
 import com.example.movietracker.helper.UserRepositoryHelper;
-import com.example.movietracker.mapper.MovieMapper;
 import com.example.movietracker.repository.UserRepository;
 import com.example.movietracker.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class MovieServiceImpl implements MovieService {
 
     private final UserRepository userRepository;
-    private final MovieMapper movieMapper;
+    private final ModelMapper modelMapper;
     private final MovieRepositoryHelper movieRepositoryHelper;
     private final UserRepositoryHelper userRepositoryHelper;
 
@@ -30,7 +30,7 @@ public class MovieServiceImpl implements MovieService {
         }
         user.getWatched().add(movie);
         userRepository.save(user);
-        return movieMapper.toDto(movie);
+        return modelMapper.map(movie, MovieDto.class);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MovieServiceImpl implements MovieService {
         }
         user.getWishlist().add(movie);
         userRepository.save(user);
-        return movieMapper.toDto(movie);
+        return modelMapper.map(movie, MovieDto.class);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MovieServiceImpl implements MovieService {
         }
         user.getWishlist().remove(movie);
         userRepository.save(user);
-        return movieMapper.toDto(movie);
+        return modelMapper.map(movie, MovieDto.class);
     }
 
 }

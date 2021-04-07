@@ -2,8 +2,8 @@ package com.example.movietracker.validator;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Movie;
-import com.example.movietracker.exception.ResourceNotFoundException;
 import com.example.movietracker.exception.ResourceForbiddenException;
+import com.example.movietracker.exception.ResourceNotFoundException;
 import com.example.movietracker.repository.MovieRepository;
 import com.example.movietracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class ReviewDtoValidator implements DtoValidator<ReviewDto> {
                 .contains(movie)) {
             throw new ResourceForbiddenException("You haven't watched this movie");
         }
-        if (movie.getReview()
+        if (movie.getReviews()
                 .stream()
                 .anyMatch(review
                         -> review.getUser().getId().equals(dto.getUserId()))) {
