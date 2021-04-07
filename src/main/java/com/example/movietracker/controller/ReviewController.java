@@ -4,6 +4,7 @@ import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.service.ReviewService;
 import com.example.movietracker.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -17,7 +18,7 @@ public class ReviewController {
     private final UserService userService;
 
     @PostMapping("reviews")
-    public ReviewDto addReview(@RequestBody ReviewDto reviewDto,
+    public ReviewDto addReview(@Validated @RequestBody ReviewDto reviewDto,
                                Principal auth) {
         Long userId = userService.findByUsername(auth.getName()).getId();
         reviewDto.setUserId(userId);

@@ -2,7 +2,6 @@ package com.example.movietracker.validator;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Movie;
-import com.example.movietracker.exception.BadRequestException;
 import com.example.movietracker.exception.NotFoundException;
 import com.example.movietracker.exception.ResourceForbiddenException;
 import com.example.movietracker.repository.MovieRepository;
@@ -19,16 +18,11 @@ public class ReviewDtoValidator implements DtoValidator<ReviewDto> {
 
     @Override
     public void validate(ReviewDto dto) {
-        if (dto.getMovieId() == null || !movieRepository.existsById(dto.getMovieId())) {
+        if (!movieRepository.existsById(dto.getMovieId())) {
             throw new NotFoundException("Movie not found");
         }
-        if (dto.getUserId() == null || !userRepository.existsById(dto.getUserId())) {
+        if (!userRepository.existsById(dto.getUserId())) {
             throw new NotFoundException("User not found");
-        }
-        if(dto.getRating() < 1 || dto.getRating() > 10
-                || dto.getDate() != null
-                || dto.getId() != null) {
-            throw new BadRequestException("Incorrect format of review");
         }
         Movie movie = movieRepository.getOne(dto.getMovieId());
         if (!userRepository.getOne(dto.getUserId()).getWatched()
