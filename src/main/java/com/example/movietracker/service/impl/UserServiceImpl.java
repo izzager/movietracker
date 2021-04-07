@@ -2,7 +2,7 @@ package com.example.movietracker.service.impl;
 
 import com.example.movietracker.dto.MovieDto;
 import com.example.movietracker.entity.User;
-import com.example.movietracker.exception.NotFoundException;
+import com.example.movietracker.exception.ResourceNotFoundException;
 import com.example.movietracker.helper.UserRepositoryHelper;
 import com.example.movietracker.mapper.MovieMapper;
 import com.example.movietracker.repository.UserRepository;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public MovieDto findNextMovieInWishlist(Long userId) {
         User user = userRepositoryHelper.ensureUserExists(userId);
         if (user.getWishlist().isEmpty()) {
-            throw new NotFoundException("Your wishlist is empty");
+            throw new ResourceNotFoundException("Your wishlist is empty");
         }
         return movieMapper.toDto(user.getWishlist().get(0));
     }

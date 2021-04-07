@@ -15,9 +15,9 @@ import java.util.Objects;
 @RestControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({NotFoundException.class})
+    @ExceptionHandler({ResourceNotFoundException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String handleNotFound(final NotFoundException e) {
+    public String handleNotFound(final ResourceNotFoundException e) {
         return e.getMessage();
     }
 

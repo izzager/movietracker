@@ -2,7 +2,7 @@ package com.example.movietracker.validator;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Movie;
-import com.example.movietracker.exception.NotFoundException;
+import com.example.movietracker.exception.ResourceNotFoundException;
 import com.example.movietracker.exception.ResourceForbiddenException;
 import com.example.movietracker.repository.MovieRepository;
 import com.example.movietracker.repository.UserRepository;
@@ -19,10 +19,10 @@ public class ReviewDtoValidator implements DtoValidator<ReviewDto> {
     @Override
     public void validate(ReviewDto dto) {
         if (!movieRepository.existsById(dto.getMovieId())) {
-            throw new NotFoundException("Movie not found");
+            throw new ResourceNotFoundException("Movie not found");
         }
         if (!userRepository.existsById(dto.getUserId())) {
-            throw new NotFoundException("User not found");
+            throw new ResourceNotFoundException("User not found");
         }
         Movie movie = movieRepository.getOne(dto.getMovieId());
         if (!userRepository.getOne(dto.getUserId()).getWatched()
