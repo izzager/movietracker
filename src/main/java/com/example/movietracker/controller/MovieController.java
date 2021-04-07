@@ -10,27 +10,27 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("movies")
 public class MovieController {
 
     private final MovieService movieService;
     private final UserService userService;
 
-    @PostMapping("movies/{id}/watched")
+    @PostMapping("{id}/watched")
     public MovieDto markAsWatched(@PathVariable Long id,
                                   Principal auth) {
         Long userId = userService.findByUsername(auth.getName()).getId();
         return movieService.markAsWatched(id, userId);
     }
 
-    @PostMapping("movies/{id}/wishlist")
+    @PostMapping("{id}/wishlist")
     public MovieDto addToWishlist(@PathVariable Long id,
                                   Principal auth) {
         Long userId = userService.findByUsername(auth.getName()).getId();
         return movieService.addToWishlist(id, userId);
     }
 
-    @DeleteMapping("movies/{id}/wishlist")
+    @DeleteMapping("{id}/wishlist")
     public MovieDto removeFromWishlist(@PathVariable Long id,
                                        Principal auth) {
         Long userId = userService.findByUsername(auth.getName()).getId();
