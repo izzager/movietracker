@@ -16,21 +16,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ReviewDto {
 
-    @Null(message = "Incorrect format of review")
+    @Null(message = "Review ID must be null")
     private Long id;
 
     private Long userId;
 
-    @NotNull(message = "Movie not found")
+    @NotNull(message = "Movie ID must not be null")
     private Long movieId;
 
     private String comment;
 
-    @Min(value = 1, message = "Incorrect format of review")
-    @Max(value = 10, message = "Incorrect format of review")
+    @Min(value = 1, message = "Rating value is outside of the valid range [1; 10]")
+    @Max(value = 10, message = "Rating value is outside of the valid range [1; 10]")
     private int rating;
 
-    @Null(message = "Incorrect format of review")
+    @Null(message = "Review date must be null")
     private LocalDateTime date;
 
 }
