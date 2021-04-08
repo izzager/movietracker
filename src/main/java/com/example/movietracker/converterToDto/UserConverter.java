@@ -1,4 +1,4 @@
-package com.example.movietracker.mapperToDto;
+package com.example.movietracker.converterToDto;
 
 import com.example.movietracker.dto.UserDto;
 import com.example.movietracker.entity.User;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-public class UserMapper implements Converter<User, UserDto> {
+public class UserConverter implements Converter<User, UserDto> {
 
     private final ModelMapper modelMapper = new ModelMapper();
 

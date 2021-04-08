@@ -1,5 +1,5 @@
 package com.example.movietracker.mapperToEntity;
 
-public interface MapperToEntity<D, E> {
-    E toEntity(D dto);
+public interface MapperToEntity<T, U> {
+    U toEntity(T dto);
 }

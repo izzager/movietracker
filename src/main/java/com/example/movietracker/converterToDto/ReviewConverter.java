@@ -1,4 +1,4 @@
-package com.example.movietracker.mapperToDto;
+package com.example.movietracker.converterToDto;
 
 import com.example.movietracker.dto.ReviewDto;
 import com.example.movietracker.entity.Review;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-public class ReviewMapper implements Converter<Review, ReviewDto>{
+public class ReviewConverter implements Converter<Review, ReviewDto>{
 
     private final ModelMapper modelMapper = new ModelMapper();
 
