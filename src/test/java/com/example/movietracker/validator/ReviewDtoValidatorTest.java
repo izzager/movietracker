@@ -38,7 +38,7 @@ class ReviewDtoValidatorTest {
     public UserRepository userRepository;
 
     @Test
-    public void validate_ok() {
+    public void validate_validDto_passes() {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setUserId(USER_ID);
         reviewDto.setMovieId(MOVIE_ID);
@@ -62,7 +62,7 @@ class ReviewDtoValidatorTest {
     }
 
     @Test
-    public void validate_movieNotFound() {
+    public void validate_unexistentMovieId_throwsMovieNotFound() {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setMovieId(MOVIE_ID);
 
@@ -73,7 +73,7 @@ class ReviewDtoValidatorTest {
     }
 
     @Test
-    public void validate_userNotFound() {
+    public void validate_unexistentUserId_throwsUserNotFound() {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setUserId(USER_ID);
         reviewDto.setMovieId(MOVIE_ID);
@@ -87,7 +87,7 @@ class ReviewDtoValidatorTest {
     }
 
     @Test
-    public void validate_reviewNonWatchedMovie() {
+    public void validate_reviewNotWatchedMovie_throwsResourceForbiddenException() {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setUserId(USER_ID);
         reviewDto.setMovieId(MOVIE_ID);
@@ -109,7 +109,7 @@ class ReviewDtoValidatorTest {
     }
 
     @Test
-    public void validate_reviewReviewedMovie() {
+    public void validate_reviewReviewedMovie_throwsResourceForbiddenException() {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setUserId(USER_ID);
         reviewDto.setMovieId(MOVIE_ID);

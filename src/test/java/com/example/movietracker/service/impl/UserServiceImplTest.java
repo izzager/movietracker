@@ -41,7 +41,7 @@ public class UserServiceImplTest {
     UserRepository userRepository;
 
     @Test
-    public void findNextMovieInWishlist_ok() {
+    public void findNextMovieInWishlist_notEmptyWishlist_passes() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();
@@ -62,7 +62,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void findNextMovieInWishlist_emptyWishlist() {
+    public void findNextMovieInWishlist_emptyWishlist_throwsResourceNotFoundException() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();
@@ -75,7 +75,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void getWatchedMovies_ok() {
+    public void getWatchedMovies_passes() {
         User user = new User();
         user.setId(USER_ID);
         Set<Movie> watched = new HashSet<>();
@@ -98,7 +98,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void getWishList_ok() {
+    public void getWishList_passes() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();

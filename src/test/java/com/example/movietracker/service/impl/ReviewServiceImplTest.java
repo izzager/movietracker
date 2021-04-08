@@ -45,7 +45,7 @@ public class ReviewServiceImplTest {
 
 
     @Test
-    public void addReview_ok() {
+    public void addReview_passes() {
         ReviewDto reviewDto = new ReviewDto();
         Review review = new Review();
 
@@ -60,7 +60,7 @@ public class ReviewServiceImplTest {
     }
 
     @Test
-    public void getReviewsForMovie_ok() {
+    public void getReviewsForMovie_passes() {
         Movie movie = new Movie();
         movie.setId(MOVIE_ID);
         Review review = new Review();

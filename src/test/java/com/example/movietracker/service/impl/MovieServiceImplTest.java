@@ -46,7 +46,7 @@ public class MovieServiceImplTest {
     UserRepositoryHelper userRepositoryHelper;
 
     @Test
-    public void markAsWatched_ok() {
+    public void markAsWatched_passes() {
         User user = new User();
         user.setId(USER_ID);
         Set<Movie> watched = new HashSet<>();
@@ -68,7 +68,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void markAsWatched_alreadyWatched() {
+    public void markAsWatched_alreadyWatched_throwsResourceForbiddenException() {
         User user = new User();
         user.setId(USER_ID);
         Set<Movie> watched = new HashSet<>();
@@ -88,7 +88,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void addToWishlist_ok() {
+    public void addToWishlist_notAddedMovie_passes() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();
@@ -110,7 +110,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void addToWishlist_alreadyAdded() {
+    public void addToWishlist_alreadyAddedMovie_throwsResourceForbiddenException() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();
@@ -130,7 +130,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void removeFromWishlist_ok() {
+    public void removeFromWishlist_movieInWishlist_pass() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();
@@ -153,7 +153,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void removeFromWishlist_notAdded() {
+    public void removeFromWishlist_notAddedToWishlist_throwsResourceForbiddenException() {
         User user = new User();
         user.setId(USER_ID);
         List<Movie> wishlist = new ArrayList<>();
